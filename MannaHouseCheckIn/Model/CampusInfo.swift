@@ -17,8 +17,3 @@ struct CampusInfo : Hashable{
         href = dictionary["href"] as? String
     }
 }
-
-struct Campus {
-    let campus: String
-    let campusInfo: CampusInfo
-}

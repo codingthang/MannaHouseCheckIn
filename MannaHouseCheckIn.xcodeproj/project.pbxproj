@@ -18,6 +18,7 @@
 		3F9DE6F122DE88FB00C33BF1 /* FireStoreFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9DE6F022DE88FB00C33BF1 /* FireStoreFetch.swift */; };
 		3F9DE6F422DE8D5800C33BF1 /* Anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9DE6F322DE8D5800C33BF1 /* Anchor.swift */; };
 		3F9DE6F622DF7BC800C33BF1 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9DE6F522DF7BC800C33BF1 /* ColorExtensions.swift */; };
+		3F9DE71922E0C60900C33BF1 /* Campus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9DE71822E0C60900C33BF1 /* Campus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		3F9DE6F022DE88FB00C33BF1 /* FireStoreFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreFetch.swift; sourceTree = "<group>"; };
 		3F9DE6F322DE8D5800C33BF1 /* Anchor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Anchor.swift; sourceTree = "<group>"; };
 		3F9DE6F522DF7BC800C33BF1 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		3F9DE71822E0C60900C33BF1 /* Campus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Campus.swift; sourceTree = "<group>"; };
 		5E6526209C6F3E09A4889762 /* Pods-MannaHouseCheckIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MannaHouseCheckIn.release.xcconfig"; path = "Target Support Files/Pods-MannaHouseCheckIn/Pods-MannaHouseCheckIn.release.xcconfig"; sourceTree = "<group>"; };
 		8ABA12B7F103A724E8C74410 /* Pods-MannaHouseCheckIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MannaHouseCheckIn.debug.xcconfig"; path = "Target Support Files/Pods-MannaHouseCheckIn/Pods-MannaHouseCheckIn.debug.xcconfig"; sourceTree = "<group>"; };
 		C84BCDD98E0B1B57546C4EDB /* Pods_MannaHouseCheckIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MannaHouseCheckIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,16 +73,14 @@
 		3F9DE6D822DE660500C33BF1 /* MannaHouseCheckIn */ = {
 			isa = PBXGroup;
 			children = (
+				3F9DE71A22E0C61D00C33BF1 /* Controllers */,
+				3F9DE71722E0C5ED00C33BF1 /* Model */,
+				3F9DE71622E0C5BC00C33BF1 /* Assit */,
+				3F9DE71522E0C59400C33BF1 /* Delegate */,
 				3F9DE6F222DE8D3600C33BF1 /* Helpers */,
 				3F9DE6EF22DE88C100C33BF1 /* FireStoreFetch */,
-				3F9DE6D922DE660500C33BF1 /* AppDelegate.swift */,
-				3F9DE6DB22DE660500C33BF1 /* ViewController.swift */,
-				3F9DE6DD22DE660500C33BF1 /* Main.storyboard */,
 				3F9DE6E022DE660700C33BF1 /* Assets.xcassets */,
-				3F9DE6E222DE660700C33BF1 /* LaunchScreen.storyboard */,
 				3F9DE6E522DE660700C33BF1 /* Info.plist */,
-				3F9DE6EB22DE661500C33BF1 /* GoogleService-Info.plist */,
-				3F9DE6ED22DE754300C33BF1 /* CampusInfo.swift */,
 			);
 			path = MannaHouseCheckIn;
 			sourceTree = "<group>";
@@ -100,6 +100,41 @@
 				3F9DE6F522DF7BC800C33BF1 /* ColorExtensions.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		3F9DE71522E0C59400C33BF1 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				3F9DE6D922DE660500C33BF1 /* AppDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		3F9DE71622E0C5BC00C33BF1 /* Assit */ = {
+			isa = PBXGroup;
+			children = (
+				3F9DE6DD22DE660500C33BF1 /* Main.storyboard */,
+				3F9DE6E222DE660700C33BF1 /* LaunchScreen.storyboard */,
+				3F9DE6EB22DE661500C33BF1 /* GoogleService-Info.plist */,
+			);
+			path = Assit;
+			sourceTree = "<group>";
+		};
+		3F9DE71722E0C5ED00C33BF1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3F9DE6ED22DE754300C33BF1 /* CampusInfo.swift */,
+				3F9DE71822E0C60900C33BF1 /* Campus.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3F9DE71A22E0C61D00C33BF1 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3F9DE6DB22DE660500C33BF1 /* ViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		77F6D385969F30641FF8B363 /* Pods */ = {
@@ -238,6 +273,7 @@
 				3F9DE6F122DE88FB00C33BF1 /* FireStoreFetch.swift in Sources */,
 				3F9DE6F422DE8D5800C33BF1 /* Anchor.swift in Sources */,
 				3F9DE6EE22DE754300C33BF1 /* CampusInfo.swift in Sources */,
+				3F9DE71922E0C60900C33BF1 /* Campus.swift in Sources */,
 				3F9DE6DC22DE660500C33BF1 /* ViewController.swift in Sources */,
 				3F9DE6DA22DE660500C33BF1 /* AppDelegate.swift in Sources */,
 				3F9DE6F622DF7BC800C33BF1 /* ColorExtensions.swift in Sources */,
