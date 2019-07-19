@@ -14,10 +14,12 @@ class ViewController: UIViewController, WKNavigationDelegate {
     
     var currentCampus = [Campus]()
     var buttons = [UIButton]()
+    
+    var campusInfoDictionary = [String:String]()
+    
     let fireStore = FireStoreFetch()
     var stack = UIStackView()
     var web = WKWebView()
-    var hrefs = [String]()
     let webViewContainer = UIView()
     let backBtn = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(goBack))
     let forwardBtn = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(goNext))
@@ -51,27 +53,40 @@ class ViewController: UIViewController, WKNavigationDelegate {
         var index = 0
         
         currentCampus.forEach { (campus) in
-            let b = UIButton(type: .system)
-            b.setTitle(campus.campusInfo.title?.uppercased(), for: .normal)
-            b.tag = index
-            b.backgroundColor = index%2 == 0 ? UIColor.primaryColor : UIColor.secondaryColor
-            b.addTarget(self, action: #selector(handleWebView), for: .touchUpInside)
-            b.alpha = 0.5
-            b.setTitleColor(UIColor.init(white: 0, alpha: 0.5), for: .normal)
-            index += 1
-            self.buttons.append(b)
             
-            if let url = campus.campusInfo.href {
-                hrefs.append(url)
+            if let title = campus.campusInfo.title?.uppercased() {
+                let b = UIButton(type: .system)
+                b.setTitle(title, for: .normal)
+                b.tag = index
+                b.backgroundColor = index%2 == 0 ? UIColor.primaryColor : UIColor.secondaryColor
+                b.addTarget(self, action: #selector(handleWebView), for: .touchUpInside)
+                b.alpha = 0.5
+                b.setTitleColor(UIColor.init(white: 0, alpha: 0.5), for: .normal)
+                index += 1
+                
+                self.buttons.append(b)
+                
+                if let url = campus.campusInfo.href {
+//                    hrefs.append(url)
+                    self.campusInfoDictionary.updateValue(url, forKey: title)
+                    
+                }
             }
-            
         }
        
         buttons[0].setTitleColor(.white, for: .normal)
         buttons[0].alpha = 1
-        
         addSubViews()
-        loadingWebPage(urlString: hrefs[0])
+        //        loadingWebPage(urlString: hrefs[0])
+        if let url = buttons[0].currentTitle {
+            if campusInfoDictionary[url] != nil {
+                guard let url = campusInfoDictionary[url] else {return}
+                loadingWebPage(urlString: url)
+            } else {
+                print("No url to load")
+            }
+            
+        }
     }
     
     private func addSubViews() {
@@ -79,6 +94,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
         createWebToolbar()
         
         stack = UIStackView(arrangedSubviews: buttons)
+        
         stack.distribution = .fillEqually
         
         view.addSubview(webViewContainer)
@@ -91,7 +107,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
         
         web.allowsBackForwardNavigationGestures = true
         
-        stack.anchor(top: view.safeAreaLayoutGuide.topAnchor, right: view.safeAreaLayoutGuide.trailingAnchor, bottom: nil, left: view.safeAreaLayoutGuide.leadingAnchor, centerX: nil, centerY: nil, size: .init(width: 0, height: 44), padding: .zero)
+        stack.anchor(top: view.safeAreaLayoutGuide.topAnchor, right: view.safeAreaLayoutGuide.trailingAnchor, bottom: nil, left: view.safeAreaLayoutGuide.leadingAnchor, centerX: nil, centerY: nil, size: .init(width: 0, height: 20), padding: .zero)
         
         webViewContainer.anchor(top: stack.bottomAnchor, right: view.safeAreaLayoutGuide.trailingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, left: view.safeAreaLayoutGuide.leadingAnchor)
         
@@ -99,6 +115,9 @@ class ViewController: UIViewController, WKNavigationDelegate {
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress" {
+            if CGFloat(web.estimatedProgress) == 1 {
+               activityContainer.removeFromSuperview()
+            }
             web.alpha = CGFloat(web.estimatedProgress)
 //            activityContainer.alpha = 1 - CGFloat(web.estimatedProgress)
         }
@@ -128,8 +147,15 @@ class ViewController: UIViewController, WKNavigationDelegate {
         b.setTitleColor(.white, for: .normal)
         b.alpha = 1
         web.backForwardList.perform(Selector(("_removeAllItems")))
-//        web.load(URLRequest(url: URL(string:"about:blank")!))
-        loadingWebPage(urlString: hrefs[b.tag])
+        if let urlString =  buttons[b.tag].currentTitle {
+            
+            if campusInfoDictionary[urlString] != nil {
+                guard let url = campusInfoDictionary[urlString] else {return}
+                loadingWebPage(urlString: url)
+            } else {
+                print("ADD YOUR URL LLLLLLL")
+            }
+        }
     }
     
     @objc func goBack() {
@@ -170,11 +196,11 @@ class ViewController: UIViewController, WKNavigationDelegate {
         activityContainer.removeFromSuperview()
         checkIfcanGoback()
         checkIfcanGoForward()
-       
+        activityContainer.alpha = 0
     }
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        webViewDidStartLoad(webView_Pages: webView)
+//        webViewDidStartLoad(webView_Pages: webView)
         checkIfcanGoback()
         checkIfcanGoForward()
     }
