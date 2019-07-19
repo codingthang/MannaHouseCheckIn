@@ -12,6 +12,7 @@ import Firebase
 class FireStoreFetch {
     func fetchFireStore(location: String, completion: @escaping ([Campus]) -> ()) {
          var campusArray = [Campus]()
+        
         Firestore.firestore().collection(location).getDocuments(completion: { (query, err) in
             if let err = err {
                 print("Error fetching collection: \(err.localizedDescription)")

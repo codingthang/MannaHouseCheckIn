@@ -24,6 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.rootViewController = ViewController()
         
+//        window?.rootViewController = UINavigationController(rootViewController: MainPage())
+//
+//        UINavigationBar.appearance().shadowImage = UIImage()
+        
         return true
     }
 
